@@ -1,0 +1,23 @@
+services:
+
+  laravel:
+    image: docker.io/bitnami/laravel:10
+    ports:
+      - '8000:8000'
+    environment:
+      - DB_HOST=mysql_db
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_DATABASE=api
+    volumes:
+      - './my-project:/app'
+    depends_on:
+      - mysql_db
+
+  mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: api
+    ports:
+      - 3306:3306
